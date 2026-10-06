@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Turn long videos into polished vertical clips with Clippa.">
+  <title>Clippa — AI clip studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Clippa home"><span class="brand-mark">C</span><span>clippa</span></a>
+      <nav aria-label="Main navigation">
+        <button class="nav-item active" data-view="studio"><span>✦</span> Create clips</button>
+        <button class="nav-item" data-view="projects"><span>▣</span> My projects <b>2</b></button>
+        <button class="nav-item" data-view="exports"><span>⇩</span> Exports <b id="exportCount">0</b></button>
+      </nav>
+      <div class="plan-card">
+        <span class="eyebrow">FREE PLAN</span>
+        <div class="minutes"><strong>42</strong><span>/ 60 min</span></div>
+        <div class="meter"><i></i></div>
+        <p>Resets October 1</p>
+        <button class="upgrade-btn">Upgrade to Pro</button>
+      </div>
+      <div class="profile"><div class="avatar">KB</div><div><strong>Kevin</strong><span>Creator workspace</span></div><button aria-label="Profile menu">•••</button></div>
+    </aside>
+
+    <main>
+      <header class="topbar"><div><span class="status-dot"></span>AI editor online</div><button class="help-btn">?</button></header>
+
+      <section id="studio" class="view active-view">
+        <div class="intro">
+          <span class="eyebrow accent">NEW PROJECT</span>
+          <h1>One video. Your next <em>viral moments.</em></h1>
+          <p>Drop in your long-form content and Clippa will find the strongest moments, reframe them vertically, and add captions.</p>
+        </div>
+
+        <div class="workspace-grid">
+          <section class="source-panel card">
+            <div class="section-heading"><span>01</span><div><h2>Add your video</h2><p>Upload a file or paste a public video link.</p></div></div>
+            <div class="tabs" role="tablist"><button class="tab active" data-tab="upload">Upload</button><button class="tab" data-tab="link">YouTube link</button></div>
+            <div id="uploadPanel" class="tab-panel">
+              <label class="dropzone" id="dropzone">
+                <input id="fileInput" type="file" accept="video/*">
+                <span class="upload-icon">↥</span>
+                <strong>Drop your video here</strong>
+                <span>or click to choose a file</span>
+                <small>MP4, MOV, WebM · up to 2 hours</small>
+              </label>
+            </div>
+            <div id="linkPanel" class="tab-panel hidden">
+              <label class="url-field"><span>Video URL</span><input id="videoUrl" type="url" placeholder="https://youtube.com/watch?v=..."></label>
+              <button id="importBtn" class="secondary-btn">Import video</button>
+            </div>
+            <div id="sourceReady" class="source-ready hidden"><div class="video-thumb"><span>▶</span></div><div><strong id="sourceName">Video ready</strong><span id="sourceMeta">Analyzing source…</span></div><button id="removeSource" aria-label="Remove video">×</button></div>
+          </section>
+
+          <section class="settings-panel card">
+            <div class="section-heading"><span>02</span><div><h2>Set the direction</h2><p>Tell the editor what kind of moments to prioritize.</p></div></div>
+            <label class="field"><span>Clip goal</span><select id="goal"><option>Most engaging moments</option><option>Educational insights</option><option>Funny moments</option><option>Hot takes & reactions</option><option>Product highlights</option></select></label>
+            <div class="field"><span>Clip length</span><div class="segmented" id="lengthOptions"><button data-value="30">15–30 sec</button><button class="selected" data-value="60">30–60 sec</button><button data-value="90">60–90 sec</button></div></div>
+            <div class="field"><span>Caption style</span><div class="caption-styles"><button class="caption-choice selected" data-caption="Pulse"><b>BIG <i>IDEA</i></b><small>Pulse</small></button><button class="caption-choice" data-caption="Clean"><b>Clean words</b><small>Clean</small></button><button class="caption-choice" data-caption="Karaoke"><b><i>word</i> by word</b><small>Karaoke</small></button></div></div>
+            <label class="switch-row"><span><strong>Remove filler words</strong><small>Cut “um,” “uh,” and long pauses</small></span><input id="filler" type="checkbox" checked><i></i></label>
+          </section>
+        </div>
+
+        <button id="generateBtn" class="generate-btn" disabled><span>✦</span><span>Find my best clips<small>Usually takes 2–4 minutes</small></span><b>→</b></button>
+
+        <section id="processing" class="processing card hidden"><div class="orb"></div><div><h2 id="processingTitle">Listening for standout moments…</h2><p id="processingText">Transcribing your video and scoring each segment.</p><div class="progress"><i id="progressBar"></i></div></div><strong id="progressValue">0%</strong></section>
+
+        <section id="results" class="results hidden">
+          <div class="results-header"><div><span class="eyebrow accent">AI PICKS</span><h2>Your strongest clips</h2><p>Ranked by hook, clarity, emotion, and replay potential.</p></div><button id="exportAll" class="secondary-btn">Export all</button></div>
+          <div id="clipGrid" class="clip-grid"></div>
+        </section>
+      </section>
+
+      <section id="projects" class="view"><div class="page-title"><span class="eyebrow accent">LIBRARY</span><h1>My projects</h1><p>Your recent clipping sessions.</p></div><div class="project-grid"><article class="project card"><div class="project-art purple">▶</div><div><strong>Podcast episode 12</strong><span>6 clips · Sep 18</span></div></article><article class="project card"><div class="project-art blue">▶</div><div><strong>Real estate Q&amp;A</strong><span>4 clips · Sep 15</span></div></article></div></section>
+      <section id="exports" class="view"><div class="page-title"><span class="eyebrow accent">READY TO POST</span><h1>Exports</h1><p>Clips you have queued for download.</p></div><div id="exportList" class="export-list"><div class="empty-state card"><span>⇩</span><h2>No exports yet</h2><p>Generate clips and add your favorites here.</p></div></div></section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
