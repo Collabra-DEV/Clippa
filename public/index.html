@@ -1,85 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Turn long videos into polished vertical clips with Clippa.">
-  <title>Clippa — AI clip studio</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <a class="brand" href="#" aria-label="Clippa home"><span class="brand-mark">C</span><span>clippa</span></a>
-      <nav aria-label="Main navigation">
-        <button class="nav-item active" data-view="studio"><span>✦</span> Create clips</button>
-        <button class="nav-item" data-view="projects"><span>▣</span> My projects <b>2</b></button>
-        <button class="nav-item" data-view="exports"><span>⇩</span> Exports <b id="exportCount">0</b></button>
-      </nav>
-      <div class="plan-card">
-        <span class="eyebrow">FREE PLAN</span>
-        <div class="minutes"><strong>42</strong><span>/ 60 min</span></div>
-        <div class="meter"><i></i></div>
-        <p>Resets October 1</p>
-        <button class="upgrade-btn">Upgrade to Pro</button>
-      </div>
-      <div class="profile"><div class="avatar">KB</div><div><strong>Kevin</strong><span>Creator workspace</span></div><button aria-label="Profile menu">•••</button></div>
-    </aside>
-
-    <main>
-      <header class="topbar"><div><span class="status-dot"></span>AI editor online</div><button class="help-btn">?</button></header>
-
-      <section id="studio" class="view active-view">
-        <div class="intro">
-          <span class="eyebrow accent">NEW PROJECT</span>
-          <h1>One video. Your next <em>viral moments.</em></h1>
-          <p>Drop in your long-form content and Clippa will find the strongest moments, reframe them vertically, and add captions.</p>
-        </div>
-
-        <div class="workspace-grid">
-          <section class="source-panel card">
-            <div class="section-heading"><span>01</span><div><h2>Add your video</h2><p>Upload a file or paste a public video link.</p></div></div>
-            <div class="tabs" role="tablist"><button class="tab active" data-tab="upload">Upload</button><button class="tab" data-tab="link">YouTube link</button></div>
-            <div id="uploadPanel" class="tab-panel">
-              <label class="dropzone" id="dropzone">
-                <input id="fileInput" type="file" accept="video/*">
-                <span class="upload-icon">↥</span>
-                <strong>Drop your video here</strong>
-                <span>or click to choose a file</span>
-                <small>MP4, MOV, WebM · up to 2 hours</small>
-              </label>
-            </div>
-            <div id="linkPanel" class="tab-panel hidden">
-              <label class="url-field"><span>Video URL</span><input id="videoUrl" type="url" placeholder="https://youtube.com/watch?v=..."></label>
-              <button id="importBtn" class="secondary-btn">Import video</button>
-            </div>
-            <div id="sourceReady" class="source-ready hidden"><div class="video-thumb"><span>▶</span></div><div><strong id="sourceName">Video ready</strong><span id="sourceMeta">Analyzing source…</span></div><button id="removeSource" aria-label="Remove video">×</button></div>
-          </section>
-
-          <section class="settings-panel card">
-            <div class="section-heading"><span>02</span><div><h2>Set the direction</h2><p>Tell the editor what kind of moments to prioritize.</p></div></div>
-            <label class="field"><span>Clip goal</span><select id="goal"><option>Most engaging moments</option><option>Educational insights</option><option>Funny moments</option><option>Hot takes & reactions</option><option>Product highlights</option></select></label>
-            <div class="field"><span>Clip length</span><div class="segmented" id="lengthOptions"><button data-value="30">15–30 sec</button><button class="selected" data-value="60">30–60 sec</button><button data-value="90">60–90 sec</button></div></div>
-            <div class="field"><span>Caption style</span><div class="caption-styles"><button class="caption-choice selected" data-caption="Pulse"><b>BIG <i>IDEA</i></b><small>Pulse</small></button><button class="caption-choice" data-caption="Clean"><b>Clean words</b><small>Clean</small></button><button class="caption-choice" data-caption="Karaoke"><b><i>word</i> by word</b><small>Karaoke</small></button></div></div>
-            <label class="switch-row"><span><strong>Remove filler words</strong><small>Cut “um,” “uh,” and long pauses</small></span><input id="filler" type="checkbox" checked><i></i></label>
-          </section>
-        </div>
-
-        <button id="generateBtn" class="generate-btn" disabled><span>✦</span><span>Find my best clips<small>Usually takes 2–4 minutes</small></span><b>→</b></button>
-
-        <section id="processing" class="processing card hidden"><div class="orb"></div><div><h2 id="processingTitle">Listening for standout moments…</h2><p id="processingText">Transcribing your video and scoring each segment.</p><div class="progress"><i id="progressBar"></i></div></div><strong id="progressValue">0%</strong></section>
-
-        <section id="results" class="results hidden">
-          <div class="results-header"><div><span class="eyebrow accent">AI PICKS</span><h2>Your strongest clips</h2><p>Ranked by hook, clarity, emotion, and replay potential.</p></div><button id="exportAll" class="secondary-btn">Export all</button></div>
-          <div id="clipGrid" class="clip-grid"></div>
-        </section>
-      </section>
-
-      <section id="projects" class="view"><div class="page-title"><span class="eyebrow accent">LIBRARY</span><h1>My projects</h1><p>Your recent clipping sessions.</p></div><div class="project-grid"><article class="project card"><div class="project-art purple">▶</div><div><strong>Podcast episode 12</strong><span>6 clips · Sep 18</span></div></article><article class="project card"><div class="project-art blue">▶</div><div><strong>Real estate Q&amp;A</strong><span>4 clips · Sep 15</span></div></article></div></section>
-      <section id="exports" class="view"><div class="page-title"><span class="eyebrow accent">READY TO POST</span><h1>Exports</h1><p>Clips you have queued for download.</p></div><div id="exportList" class="export-list"><div class="empty-state card"><span>⇩</span><h2>No exports yet</h2><p>Generate clips and add your favorites here.</p></div></div></section>
-    </main>
-  </div>
-  <div id="toast" class="toast" role="status"></div>
-  <script src="app.js"></script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Clippa — Make more from one video</title><link rel="stylesheet" href="styles.css"></head><body>
+<header><a class="brand" href="#">✦ clippa</a><nav><button data-go="plans">Plans</button><button id="projectsNav" hidden>My projects</button><button id="account" class="outline">Sign in</button></nav></header>
+<main><section id="home"><div class="hero"><span class="tag">ONE VIDEO. MORE POSSIBILITIES.</span><h1>Your next clip<br>starts here.</h1><p>Choose a video, set your style, and explore short clips.<br>Start as a guest. Sign in when you want to save your work.</p><button class="primary" data-go="studio">Start creating →</button><small>No account needed · Free to explore</small></div><div class="steps"><article><b>01</b><h3>Add a video</h3><p>Choose a video from your device.</p></article><article><b>02</b><h3>Choose your style</h3><p>Pick a clip length and export format.</p></article><article><b>03</b><h3>Review your clips</h3><p>Review and download your clips. Sign in to save your settings.</p></article></div><p class="notice">Upload a video up to 12 MB and 10 minutes. Gemini selects highlights, and Clippa cuts downloadable MP4 clips. Automatic captions are coming next.</p></section>
+<section id="studio" hidden><div class="heading"><span class="tag">YOUR WORKSPACE</span><h1>Let’s make a clip.</h1><p id="saveHint">Guest mode: your work disappears when you refresh or leave.</p></div><div class="editor"><div class="card"><h2>1. Add your video</h2><label class="drop">＋<strong>Choose a video</strong><span>MP4, WebM, or another browser-supported video</span><input id="file" type="file" accept="video/*"></label><video id="video" controls hidden></video><p id="filename"></p></div><div class="card"><h2>2. Make it yours</h2><label>Project name<input id="name" maxlength="100" placeholder="My first clip"></label><label>Clip length<select id="length"><option>15–30 seconds</option><option selected>30–60 seconds</option><option>60–90 seconds</option></select></label><label>Caption style (coming soon)<select id="caption" disabled><option>Bold</option><option>Clean</option><option>Word by word</option></select></label><label>Export format<select id="format"><option value="original">Original framing</option><option value="vertical">Vertical 9:16 · center crop</option></select></label><label class="check"><input type="checkbox" id="aiConsent">I have permission to use this video and send it to Google Gemini for analysis.</label><button id="preview" class="outline">Preview my settings</button><button id="generate" class="primary">Find & create clips</button><p id="jobStatus" role="status"></p><div id="clipResults"></div><button id="save" class="outline">Sign in to save</button><p class="muted">Saved projects include your title and settings. Original video files are not uploaded or saved yet.</p></div></div><div id="result" class="card" hidden><h2>Your clip setup</h2><p id="resultText"></p><p>Choose Find & create clips to generate downloadable highlights.</p></div></section>
+<section id="plans" hidden><div class="heading"><span class="tag">KEEP IT SIMPLE</span><h1>A plan for your pace.</h1><p>Start free. Pro will be available when video processing launches.</p></div><div class="plan-grid"><article class="card"><span class="tag">FREE</span><h2>Try Clippa</h2><p class="price">$0</p><ul><li>Explore without an account</li><li>Gemini highlight selection</li><li>Download up to 3 MP4 clips per job</li><li>Starter limit: 3 jobs per hour per connection</li><li>Choose clip and caption settings</li><li>Save project settings when signed in</li></ul><button class="primary" data-go="studio">Start free</button></article><article class="card pro"><span class="tag">PRO · COMING SOON</span><h2>Create more</h2><p class="price">Pricing coming soon</p><ul><li>Planned: more processing minutes</li><li>Planned: longer video uploads</li><li>Planned: more export options</li><li>Planned: priority processing</li></ul><button disabled>Not available yet</button><p class="muted">No subscription or payment is collected in this version.</p></article></div></section>
+<section id="projects" hidden><div class="heading"><span class="tag">YOUR LIBRARY</span><h1>Saved projects.</h1><p>Titles and settings saved to your account.</p></div><div id="projectList"></div></section>
+</main><footer><span>© <span id="year"></span> Clippa</span><button id="termsLink">Terms & privacy</button><span>Made for your next idea.</span></footer>
+<dialog id="auth"><button class="close" data-close="auth" aria-label="Close">×</button><h2 id="authTitle">Welcome back.</h2><p>Sign in to save your project settings.</p><form id="authForm"><label id="displayLabel" hidden>Name<input id="displayName" maxlength="80" autocomplete="name"></label><label>Email<input id="email" type="email" required autocomplete="email"></label><label>Password<input id="password" type="password" minlength="8" required autocomplete="current-password"></label><label class="check" id="consentLabel" hidden><input id="consent" type="checkbox">I agree to the <button type="button" id="authTerms">terms and privacy notice</button>.</label><button id="authSubmit" class="primary">Sign in</button><p id="authStatus" role="status"></p></form><button id="toggleAuth">New here? Create an account</button><button data-close="auth">Continue as a guest</button></dialog>
+<dialog id="terms"><button class="close" data-close="terms" aria-label="Close">×</button><h2>Terms & privacy notice</h2><p>Last updated: October 5, 2026</p><h3>Using Clippa</h3><p>Clippa is a preview workspace for video clip creation. Current functionality is limited to local video preview and project settings. Gemini-assisted highlight selection and MP4 exports are offered for supported uploads. Automatic captions and paid subscriptions are not currently offered. No result or performance guarantee is made.</p><h3>Your content</h3><p>Only use content you own or have permission to use. You retain ownership. Do not use the service for unlawful content, infringement, abuse, or attempts to access other accounts.</p><h3>Accounts and saving</h3><p>Guest work is temporary and is cleared when you reload or leave. Signed-in users can save project titles and settings. Videos are temporarily uploaded for processing when you choose Find & create clips and consent to Gemini analysis. They are not saved to your account. Keep your account credentials private.</p><h3>Privacy</h3><p>Account authentication and saved settings are handled by Supabase when configured. It processes your email, account information, and authentication data. Uploaded videos are temporarily processed on the server and sent to Google Gemini. Google processes these according to its Gemini API terms, which can differ for paid and unpaid usage. Do not submit sensitive content without reviewing those terms. Server input copies are removed when processing finishes; output clips expire after about one hour or on server restart. Temporary output URLs are bearer links: anyone with the exact link can access that clip until expiration. Your browser holds a temporary session token while signed in. Clippa stores project titles, settings, and dates in your account. Hosting and authentication providers may process operational logs. There are no advertising or analytics scripts in this version.</p><h3>Plans</h3><p>The current preview is free. Pro is a planned offering; prices and limits have not been set. Any future charges will be shown before purchase and require agreement.</p><h3>Availability and changes</h3><p>The service may change or be unavailable. Keep your own copies of important work. To the extent permitted by applicable law, it is provided as available without warranties. Nothing here removes rights that cannot legally be excluded.</p><h3>Deleting data and contacting us</h3><p>You can delete saved projects from My projects. Account deletion and privacy requests must be directed to the operator at the contact below.</p><p id="contactText"></p></dialog>
+<div id="toast" role="status"></div><script src="config.js"></script><script src="app.js"></script></body></html>

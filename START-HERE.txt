@@ -1,0 +1,80 @@
+CLIPPA GEMINI — REAL HIGHLIGHT SELECTION + MP4 CUTTING
+
+WHAT THIS VERSION DOES
+Uploads a video, asks Gemini to choose up to three highlight time ranges,
+then cuts actual MP4 files using FFmpeg. Original framing or 9:16 center crop.
+Includes the simple home page, optional Supabase login, saved project settings,
+Free/coming-soon Pro pages, and updated terms/privacy text.
+Captions, face tracking, YouTube downloading, paid billing, and persistent
+video/project exports are not implemented. Supabase saves SETTINGS only.
+
+UPLOAD TO GITHUB
+1. Extract this ZIP. Open its Clippa-Gemini folder.
+2. In GitHub open the ROOT of Collabra-DEV/Clippa, not the public folder.
+3. Add file > Upload files. Drag the public FOLDER and these files:
+   server.py, Dockerfile, requirements.txt, supabase-setup.sql, START-HERE.txt.
+4. Commit. Keep files at repository root, with public/index.html underneath.
+5. If you already configured Supabase in config.js, put those same public
+   values and your contact email into this new public/config.js before upload.
+6. Never upload a real Gemini key. .env.example is just a reference template.
+
+RENDER — CREATE A NEW WEB SERVICE
+Your existing Static Site cannot run video processing.
+Keep it while testing this new service; it does not need to be deleted.
+1. Render dashboard > New > Web Service.
+2. Select Collabra-DEV/Clippa.
+3. Name: clippa-gemini (or another available name).
+4. Branch: main. Root Directory: leave blank.
+5. Runtime/Language: Docker. Dockerfile Path: ./Dockerfile.
+6. Docker Build Context: . (if shown).
+7. Leave Docker Command blank; the included Dockerfile starts the server.
+8. In Environment add:
+   GEMINI_API_KEY = paste your actual Gemini API key HERE
+   GEMINI_MODEL = gemini-3.8-flash
+   Model access can differ; use an available video-capable model from your
+   AI Studio account if this model is unavailable to you.
+9. Create/Deploy Web Service. FFmpeg and Python dependencies install during
+   the Docker build. Open the NEW onrender.com URL after it becomes Live.
+10. If Supabase is connected, update its Site URL/redirect URLs to this NEW
+    Web Service URL for email confirmation links.
+11. Select an MP4 under 12 MB, 15 seconds to 10 minutes long. Choose clip
+    length, confirm the Google processing checkbox, and click Find & create
+    clips. Download finished MP4s before leaving.
+
+GET YOUR GEMINI KEY
+Visit https://aistudio.google.com/apikey and create a key for your project.
+Set the key in Render > your NEW Web Service > Environment, never in public
+JavaScript or GitHub. API availability and usage charges depend on your Google
+project, model access, billing, and quota. Requests by guests use YOUR quota.
+
+STARTER LIMITS
+12 MB upload; 10-minute input; 3 requests/hour per connection; one job at a
+ time. Rate limits are in memory and reset on restarts; this is not a full
+production quota/billing system. Free Render services can sleep and lose
+ temporary output files. More resources may be needed for larger videos.
+Output URLs are unguessable bearer links. Anyone with a complete output link
+can access that clip until expiration. Share them only if intended.
+Original/analysis server copies are deleted when processing ends. Output
+clips expire after about one hour or earlier on server restart. Guest work is
+not saved to an account, but temporary processing outputs exist until expiry.
+Google receives an analysis copy when you submit a job. Review its data terms
+before uploading confidential material. Supabase is optional for clipping.
+
+LOCAL WINDOWS USE (OPTIONAL)
+Install Docker Desktop. Open PowerShell in this project's folder:
+  docker build -t clippa .
+Set a session environment variable (replace the placeholder):
+  $env:GEMINI_API_KEY="YOUR_KEY"
+Run:
+  docker run --rm -p 10000:10000 -e GEMINI_API_KEY clippa
+Open http://localhost:10000. Keep PowerShell/Docker running locally.
+
+VALIDATION
+Python/JavaScript syntax and local FFmpeg cutting were checked. Gemini live
+API and Supabase account saving need your keys/configuration and have not been
+verified against your accounts. Model choices depend on provider availability.
+
+REFERENCE
+https://ai.google.dev/gemini-api/docs/video-understanding
+https://ai.google.dev/gemini-api/docs/api-key
+https://render.com/docs/web-services
