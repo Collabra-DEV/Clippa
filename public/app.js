@@ -3,7 +3,7 @@ let session=null,signup=false,videoUrl=null;
 const configured=()=>/^https:\/\//.test(cfg.supabaseUrl)&&!!cfg.supabaseAnonKey;
 try{session=JSON.parse(sessionStorage.getItem('clippa-session')||'null')}catch{}
 function toast(t){$('#toast').textContent=t;$('#toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').classList.remove('show'),4000)}
-function show(id){for(const s of document.querySelectorAll('main>section'))s.hidden=s.id!==id;window.scrollTo(0,0)}
+function show(id){$('#backHome').hidden=id==='home';for(const s of document.querySelectorAll('main>section'))s.hidden=s.id!==id;window.scrollTo(0,0)}
 function clearWork(){if(videoUrl)URL.revokeObjectURL(videoUrl);videoUrl=null;$('#video').removeAttribute('src');$('#video').hidden=true;$('#file').value='';$('#filename').textContent='';$('#name').value='';$('#result').hidden=true;$('#clipResults').replaceChildren();$('#jobStatus').textContent='';$('#projectList').replaceChildren()}
 function applySession(){ $('#account').textContent=session?'Sign out':'Sign in';$('#projectsNav').hidden=!session;$('#save').textContent=session?'Save project settings':'Sign in to save';$('#saveHint').textContent=session?'Your account can save project titles and settings.':'Guest mode: your work disappears when you refresh or leave.'}
 function authOpen(){ $('#authStatus').textContent=configured()?'':'Accounts are not connected yet. You can continue as a guest.';$('#authSubmit').disabled=!configured();$('#auth').showModal()}
@@ -51,3 +51,5 @@ $('#generate').onclick=async()=>{
   }catch(e){$('#jobStatus').textContent=e.message}finally{jobRunning=false;$('#generate').disabled=false}
 };
 fetch('/api/status').then(r=>r.json()).then(s=>{if(!s.configured)$('#jobStatus').textContent='Add GEMINI_API_KEY in Render to activate clipping.'}).catch(()=>{$('#jobStatus').textContent='Clipping needs the included backend. Deploy this version as a Render Web Service.'});
+
+$('#homeSignIn').onclick=()=>{if(session)show('projects'),loadProjects();else authOpen()};
