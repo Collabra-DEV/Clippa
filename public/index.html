@@ -3,22 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Clippa — Make more from one video</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="stylesheet" href="styles.css">
+  <meta
+    name="description"
+    content="Turn longer videos into short highlights with Clippa. Find moments with Gemini, preview your clips, and download MP4 videos."
+  >
+
+  <!-- Embedded star favicon: no separate file needed -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231c694b'/%3E%3Cpath d='M32 8 Q36 28 56 32 Q36 36 32 56 Q28 36 8 32 Q28 28 32 8Z' fill='white'/%3E%3C/svg%3E"
+  >
+
+  <meta name="theme-color" content="#1c694b">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body>
   <header>
-    <a class="brand" href="/">✦ clippa</a>
+    <a class="brand" href="/" aria-label="Clippa home">✦ clippa</a>
 
-    <nav>
+    <nav aria-label="Main navigation">
       <button
         id="planBadge"
         class="plan-badge"
         data-go="plans"
         aria-label="Current plan: Free. View plans."
-      >● Free plan</button>
+      >
+        ● Free plan
+      </button>
 
       <button data-go="plans">Plans</button>
       <button id="projectsNav" hidden>My projects</button>
@@ -32,8 +47,11 @@
       class="back-home"
       data-go="home"
       hidden
-    >← Back to home</button>
+    >
+      ← Back to home
+    </button>
 
+    <!-- HOME -->
     <section id="home">
       <div class="hero">
         <span class="tag">ONE VIDEO. MORE POSSIBILITIES.</span>
@@ -45,9 +63,9 @@
 
         <p>
           Turn longer videos into short, shareable highlights.
-          Gemini finds promising moments, and Clippa turns them into
-          downloadable clips. Start as a guest, or sign in to save
-          your project settings.
+          Gemini finds promising moments, and Clippa turns them
+          into downloadable clips. Start as a guest, or sign in
+          to save your project settings.
         </p>
 
         <button class="primary" data-go="studio">
@@ -74,7 +92,7 @@
           <span class="tag">YOUR ORIGINAL VIDEO</span>
 
           <div class="source-art">
-            <span class="play-mark">▶</span>
+            <span class="play-mark" aria-hidden="true">▶</span>
 
             <div class="waveform" aria-hidden="true">
               <i></i><i></i><i></i><i></i>
@@ -141,9 +159,9 @@
 
           <p>
             Clippa helps you find the parts worth sharing.
-            Upload your video, choose a clip length, and let Gemini
-            suggest up to three highlights. Review the results,
-            then download the ones you like.
+            Upload your video, choose a clip length, and let
+            Gemini suggest up to three highlights. Review the
+            results, then download the ones you like.
           </p>
 
           <button class="primary" data-go="studio">
@@ -153,34 +171,36 @@
 
         <div class="feature-list">
           <article>
-            <span>✦</span>
+            <span aria-hidden="true">✦</span>
             <div>
               <h3>AI-assisted selection</h3>
               <p>
-                Gemini reviews the video and suggests moments with
-                a clear beginning and ending. You decide what to keep.
+                Gemini reviews the video and suggests moments
+                with a clear beginning and ending.
+                You decide what to keep.
               </p>
             </div>
           </article>
 
           <article>
-            <span>↗</span>
+            <span aria-hidden="true">↗</span>
             <div>
               <h3>Two ways to frame it</h3>
               <p>
                 Keep the original framing or choose a vertical
-                9:16 center crop. Automatic face tracking is not included.
+                9:16 center crop. Automatic face tracking
+                is not included.
               </p>
             </div>
           </article>
 
           <article>
-            <span>⇩</span>
+            <span aria-hidden="true">⇩</span>
             <div>
               <h3>Real MP4 downloads</h3>
               <p>
-                Preview the finished clips and download them to your
-                device before temporary exports expire.
+                Preview the finished clips and download them
+                to your device before temporary exports expire.
               </p>
             </div>
           </article>
@@ -193,10 +213,10 @@
           <h2>Start freely. Save when you sign in.</h2>
 
           <p>
-            Guests can create and download clips without an account.
-            Sign in to keep project titles and settings for later.
-            Video files and finished clips are not saved to your
-            account yet.
+            Guests can create and download clips without an
+            account. Sign in to keep project titles and settings
+            for later. Video files and finished clips are not
+            saved to your account yet.
           </p>
         </div>
 
@@ -210,12 +230,12 @@
 
         <p>
           Use videos you own or have permission to edit.
-          This starter supports uploads up to 12 MB and 10 minutes,
-          with three requests per hour per connection.
-          Videos are sent to Google Gemini for analysis.
-          Download your clips promptly: exports are temporary.
-          Automatic captions, YouTube imports, and Pro subscriptions
-          are coming later.
+          This starter supports uploads up to 12 MB and
+          10 minutes, with three requests per hour per
+          connection. Videos are sent to Google Gemini for
+          analysis. Download your clips promptly: exports
+          are temporary. Automatic captions, YouTube imports,
+          and Pro subscriptions are coming later.
         </p>
       </details>
 
@@ -226,6 +246,7 @@
       </p>
     </section>
 
+    <!-- CLIP WORKSPACE -->
     <section id="studio" hidden>
       <div class="heading">
         <span class="tag">YOUR WORKSPACE</span>
@@ -241,7 +262,7 @@
           <h2>1. Add your video</h2>
 
           <label class="drop">
-            ＋
+            <span aria-hidden="true">＋</span>
             <strong>Choose a video</strong>
             <span>
               MP4, WebM, or another browser-supported video
@@ -249,7 +270,7 @@
             <input id="file" type="file" accept="video/*">
           </label>
 
-          <video id="video" controls hidden></video>
+          <video id="video" controls playsinline hidden></video>
           <p id="filename"></p>
         </div>
 
@@ -260,6 +281,7 @@
             Project name
             <input
               id="name"
+              type="text"
               maxlength="100"
               placeholder="My first clip"
             >
@@ -316,8 +338,8 @@
 
           <p class="muted">
             Saved projects include your title and settings.
-            Videos are uploaded temporarily for clipping;
-            original files and exports are not saved to your account.
+            Videos are uploaded temporarily for clipping.
+            Original files and exports are not saved to your account.
           </p>
         </div>
       </div>
@@ -332,11 +354,14 @@
       </div>
     </section>
 
+    <!-- PLANS -->
     <section id="plans" hidden>
       <div class="heading">
         <span class="tag">KEEP IT SIMPLE</span>
         <h1>A plan for your pace.</h1>
-        <p>Start free. Pro features and subscriptions are coming soon.</p>
+        <p>
+          Start free. Pro features and subscriptions are coming soon.
+        </p>
       </div>
 
       <div class="plan-grid">
@@ -380,6 +405,7 @@
       </div>
     </section>
 
+    <!-- SAVED PROJECTS -->
     <section id="projects" hidden>
       <div class="heading">
         <span class="tag">YOUR LIBRARY</span>
@@ -397,12 +423,15 @@
     <span>Made for your next idea.</span>
   </footer>
 
-  <dialog id="auth">
+  <!-- SIGN IN / CREATE ACCOUNT -->
+  <dialog id="auth" aria-labelledby="authTitle">
     <button
       class="close"
       data-close="auth"
-      aria-label="Close"
-    >×</button>
+      aria-label="Close sign-in window"
+    >
+      ×
+    </button>
 
     <h2 id="authTitle">Welcome back.</h2>
     <p>Sign in to save your project settings.</p>
@@ -412,6 +441,7 @@
         Name
         <input
           id="displayName"
+          type="text"
           maxlength="80"
           autocomplete="name"
         >
@@ -446,92 +476,116 @@
         </button>.
       </label>
 
-      <button id="authSubmit" class="primary">Sign in</button>
+      <button id="authSubmit" class="primary" type="submit">
+        Sign in
+      </button>
+
       <p id="authStatus" role="status"></p>
     </form>
 
-    <button id="toggleAuth">New here? Create an account</button>
-    <button data-close="auth">Continue as a guest</button>
+    <button id="toggleAuth" type="button">
+      New here? Create an account
+    </button>
+
+    <button data-close="auth" type="button">
+      Continue as a guest
+    </button>
   </dialog>
 
-  <dialog id="terms">
+  <!-- TERMS AND PRIVACY -->
+  <dialog id="terms" aria-labelledby="termsTitle">
     <button
       class="close"
       data-close="terms"
-      aria-label="Close"
-    >×</button>
+      aria-label="Close terms"
+    >
+      ×
+    </button>
 
-    <h2>Terms &amp; privacy notice</h2>
+    <h2 id="termsTitle">Terms &amp; privacy notice</h2>
     <p>Last updated: October 6, 2026</p>
 
     <h3>Using Clippa</h3>
     <p>
       Clippa is a preview workspace for video clip creation.
-      Gemini-assisted highlight selection and MP4 exports are offered
-      for supported uploads. Signed-in users can save project titles
-      and settings when account services are configured.
-      Automatic captions and paid subscriptions are not currently
-      offered. No result or performance guarantee is made.
+      Gemini-assisted highlight selection and MP4 exports are
+      offered for supported uploads. Signed-in users can save
+      project titles and settings when account services are
+      configured. Automatic captions and paid subscriptions
+      are not currently offered. No result or performance
+      guarantee is made.
     </p>
 
     <h3>Your content</h3>
     <p>
       Only use content you own or have permission to use.
       You retain ownership. Do not use the service for unlawful
-      content, infringement, abuse, or attempts to access other accounts.
+      content, infringement, abuse, or attempts to access
+      other accounts.
     </p>
 
     <h3>Accounts and saving</h3>
     <p>
-      Guest work is temporary and is cleared when you reload or leave.
-      Signed-in users can save project titles and settings.
-      Videos are temporarily uploaded for processing when you choose
-      Find &amp; create clips and consent to Gemini analysis.
-      They are not saved to your account.
+      Guest work is temporary and is cleared when you reload
+      or leave. Signed-in users can save project titles and
+      settings. Videos are temporarily uploaded for processing
+      when you choose Find &amp; create clips and consent to
+      Gemini analysis. They are not saved to your account.
       Keep your account credentials private.
     </p>
 
     <h3>Privacy</h3>
     <p>
-      Account authentication and saved settings are handled by
-      Supabase when configured. It processes your email, account
-      information, and authentication data.
-      Uploaded videos are temporarily processed on the server and
-      sent to Google Gemini. Google processes these according to
-      its Gemini API terms, which can differ for paid and unpaid usage.
-      Do not submit sensitive content without reviewing those terms.
-      Server input copies are removed when processing finishes;
-      output clips expire after about one hour or on server restart.
-      Temporary output URLs are bearer links: anyone with the exact
-      link can access that clip until expiration.
-      Your browser holds a temporary session token while signed in.
-      Clippa stores project titles, settings, and dates in your account.
-      Hosting and authentication providers may process operational logs.
-      There are no advertising or analytics scripts in this version.
+      Account authentication and saved settings are handled
+      by Supabase when configured. It processes your email,
+      account information, and authentication data.
+      Uploaded videos are temporarily processed on the
+      server and sent to Google Gemini. Google processes
+      these according to its Gemini API terms, which can
+      differ for paid and unpaid usage. Do not submit
+      sensitive content without reviewing those terms.
+    </p>
+
+    <p>
+      Server input copies are removed when processing
+      finishes. Output clips expire after about one hour
+      or on server restart. Temporary output URLs are
+      bearer links: anyone with the exact link can access
+      that clip until expiration.
+    </p>
+
+    <p>
+      Your browser holds a temporary session token while
+      signed in. Clippa stores project titles, settings,
+      and dates in your account. Hosting and authentication
+      providers may process operational logs.
+      There are no advertising or analytics scripts
+      in this version.
     </p>
 
     <h3>Plans</h3>
     <p>
-      The current preview is free.
-      Pro is a planned offering; prices and limits have not been set.
-      Any future charges will be shown before purchase and
-      require agreement.
+      The current preview is free. Pro is a planned offering;
+      prices and limits have not been set. Any future
+      charges will be shown before purchase and require
+      agreement.
     </p>
 
     <h3>Availability and changes</h3>
     <p>
       The service may change or be unavailable.
       Keep your own copies of important work.
-      To the extent permitted by applicable law, it is provided
-      as available without warranties.
-      Nothing here removes rights that cannot legally be excluded.
+      To the extent permitted by applicable law,
+      it is provided as available without warranties.
+      Nothing here removes rights that cannot legally
+      be excluded.
     </p>
 
     <h3>Deleting data and contacting us</h3>
     <p>
       You can delete saved projects from My projects.
-      Account deletion and privacy requests must be directed
-      to the operator at the contact below.
+      Account deletion and privacy requests must be
+      directed to the operator at the contact below.
     </p>
 
     <p id="contactText"></p>
@@ -539,7 +593,13 @@
 
   <div id="toast" role="status"></div>
 
-  <script src="config.js"></script>
-  <script src="app.js"></script>
+  <noscript>
+    <p class="notice">
+      Please enable JavaScript to use Clippa’s workspace.
+    </p>
+  </noscript>
+
+  <script src="/config.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
