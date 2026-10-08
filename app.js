@@ -31,13 +31,13 @@ $('#generate').onclick=async()=>{
   if(jobRunning)return;
   const f=$('#file').files[0];
   if(!f)return toast('Choose your video file first.');
-  if(f.size>12*1024*1024)return toast('Choose a video smaller than 12 MB.');
+  if(f.size>200*1024*1024)return toast('Choose a video no larger than 200 MB.');
   if(!$('#aiConsent').checked)return toast('Please confirm permission to send this video to Gemini.');
   const form=new FormData();form.append('video',f);form.append('length',{'15–30 seconds':30,'30–60 seconds':60,'60–90 seconds':90}[$('#length').value]);form.append('format',$('#format').value);
   jobRunning=true;$('#generate').disabled=true;$('#clipResults').replaceChildren();$('#jobStatus').textContent='Uploading your video…';
   try{
     const res=await fetch('/api/clips',{method:'POST',body:form});const data=await res.json();if(!res.ok)throw new Error(data.detail||'Upload failed.');
-    const deadline=Date.now()+15*60*1000;
+    const deadline=Date.now()+30*60*1000;
     while(Date.now()<deadline){
       await new Promise(r=>setTimeout(r,2500));const response=await fetch('/api/jobs/'+encodeURIComponent(data.job));const job=await response.json();if(!response.ok)throw new Error(job.detail||'Session expired.');
       $('#jobStatus').textContent=job.message;
